@@ -1,0 +1,63 @@
+---
+title: "ST-512-HW5-Yefrid_Cordoba"
+author: "Yefrid Cordoba"
+format: html
+editor: visual
+---
+
+## Problem 1
+
+### a
+
+Complete the ANOVA table
+
+```{r}
+a <- 5
+dfa <- a-1
+b <- 3
+dfb <- b-1
+dfab <- dfa * dfb
+nT<- a * b * 6
+dfe <- nT - (a * b)
+SSA <- 375
+SSB <- 462
+SSAB <- 38
+SST <- 1128
+SSE <- SST - SSA - SSB - SSAB
+MSA <- SSA / dfa
+MSB <- SSB / dfb
+MSAB <- SSAB / dfab
+MSE <- SSE / dfe
+F_A <- MSA / MSE
+F_B <- MSB / MSE
+F_AB <- MSAB / MSE
+P_A <- pf(F_A, dfa, dfe, lower.tail = F)
+P_B <- pf(F_B, dfb, dfe, lower.tail = F)
+P_AB <- pf(F_AB, dfab, dfe, lower.tail = F)
+```
+
+| Source | df | SS | MS | F-value | P-value |
+|------------|------------|------------|------------|------------|------------|
+| **Factor A** | [`r dfa`]{.underline} | 375 | [`r MSA`]{.underline} | [`r round(F_A, 2)`]{.underline} | [`r P_A`]{.underline} |
+| **Factor B** | [`r dfb`]{.underline} | 462 | [`r MSB`]{.underline} | [`r round(F_B, 2)`]{.underline} | [`r P_B`]{.underline} |
+| **A:B** | [`r dfab`]{.underline} | 38 | [`r MSAB`]{.underline} | [`r round(F_AB, 2)`]{.underline} | [`r P_AB`]{.underline} |
+| **Residual** | [`r dfe`]{.underline} | [`r SSE`]{.underline} | [`r round(MSE, 2)`]{.underline} |  |  |
+| **Total** | [`r nT - 1`]{.underline} | 1128 |  |  |  |
+
+### b
+
+Assuming an $\alpha = 0.05$, and given that this is higher than the p-value for the interaction term (`r P_AB`) we conclude that there is no interaction between the two factors.
+
+### c
+
+Testing for levels of factor: since the p-value (`r P_A`)for the factor A is much smaller than the $\alpha = 0.05$, we conclude that factor A have an effect in the mean response.
+
+### d
+
+Testing for levels of factor B: since the p-value (`r P_B`)for the factor B is much smaller than the $\alpha = 0.05$, we conclude that factor B have an effect in the mean response.
+
+## Problem 2
+
+### a
+
+
