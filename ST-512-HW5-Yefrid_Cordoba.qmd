@@ -99,3 +99,37 @@ MEb
 
 ## Problem 3
 
+### a
+
+Factor effects model
+$y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} +\epsilon_{ijk}$
+
+Where:
+
+$i = 1, 2, 3$ varieties\
+$j = 1, 2, 3$ Temperatures\
+$k = 1,2,..., 8$ Pots availables\
+$y_{ijk} =$ the observation in the $i^{th}$ variety exposed to the $i^{th}$ temperature, $k^{th}$ pot.\
+$\mu =$ a constant\
+$\alpha_i =$ the effect of the $i^{th}$ variety.\
+$\beta_j =$ the effect of the $j^{th}$ temperature.\
+$(\alpha\beta)_{ij}$ interaction of the variety and temperature.\
+$\epsilon_{ijk} =$ random error of the $k^{th}$ pot for the  $i^{th}$ variety exposed to $j^{th}$ temperature.\
+
+Assuming $\epsilon_{ijk} \sim N(0, \sigma^2)$, the errors are indepe
+
+```{r}
+variety <- factor(rep(c(0, 6, 12), each = 3))
+Temp <- factor(rep(c(15, 20, 25), times = 3))
+Dry <- c(28.71, 53.57, 126.86, 40.14, 66.86, 103.57, 31.71, 53.43, 80.26)
+
+data <- data.frame(variety, Temp, Dry)
+
+```
+
+### c
+```{r}
+interaction.plot(variety, Temp, Dry)
+interaction.plot(Temp, variety, Dry)
+```
+

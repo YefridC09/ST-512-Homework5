@@ -241,7 +241,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="problem-2">Problem 2</h2>
 <section id="a-1" class="level3">
 <h3 class="anchored" data-anchor-id="a-1">a</h3>
-<p>Two way fixed model</p>
+<p>Two way fixed model where interaction is not significant.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">4</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
@@ -273,6 +273,9 @@ window.Quarto = {
 </div>
 </div>
 </section>
+</section>
+<section id="b-1" class="level3">
+<h3 class="anchored" data-anchor-id="b-1">b</h3>
 <section id="tukeys-hsd-factor-b" class="level4">
 <h4 class="anchored" data-anchor-id="tukeys-hsd-factor-b">Tukey’s HSD factor B</h4>
 <div class="cell">
@@ -293,6 +296,52 @@ window.Quarto = {
 </div>
 </div>
 </section>
+</section>
+</section>
+<section id="problem-3" class="level2">
+<h2 class="anchored" data-anchor-id="problem-3">Problem 3</h2>
+<section id="a-2" class="level3">
+<h3 class="anchored" data-anchor-id="a-2">a</h3>
+<p>Factor effects model <span class="math inline">\(y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} +\epsilon_{ijk}\)</span></p>
+<p>Where:</p>
+<p><span class="math inline">\(i = 1, 2, 3\)</span> varieties<br>
+<span class="math inline">\(j = 1, 2, 3\)</span> Temperatures<br>
+<span class="math inline">\(k = 1,2,..., 8\)</span> Pots availables<br>
+<span class="math inline">\(y_{ijk} =\)</span> the observation in the <span class="math inline">\(i^{th}\)</span> variety exposed to the <span class="math inline">\(i^{th}\)</span> temperature, <span class="math inline">\(k^{th}\)</span> pot.<br>
+<span class="math inline">\(\mu =\)</span> a constant<br>
+<span class="math inline">\(\alpha_i =\)</span> the effect of the <span class="math inline">\(i^{th}\)</span> variety.<br>
+<span class="math inline">\(\beta_j =\)</span> the effect of the <span class="math inline">\(j^{th}\)</span> temperature.<br>
+<span class="math inline">\((\alpha\beta)_{ij}\)</span> interaction of the variety and temperature.<br>
+<span class="math inline">\(\epsilon_{ijk} =\)</span> random error of the <span class="math inline">\(k^{th}\)</span> pot for the <span class="math inline">\(i^{th}\)</span> variety exposed to <span class="math inline">\(j^{th}\)</span> temperature.<br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>variety <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">12</span>), <span class="at">each =</span> <span class="dv">3</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>Temp <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>), <span class="at">times =</span> <span class="dv">3</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>Dry <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">28.71</span>, <span class="fl">53.57</span>, <span class="fl">126.86</span>, <span class="fl">40.14</span>, <span class="fl">66.86</span>, <span class="fl">103.57</span>, <span class="fl">31.71</span>, <span class="fl">53.43</span>, <span class="fl">80.26</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(variety, Temp, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="c-1" class="level3">
+<h3 class="anchored" data-anchor-id="c-1">c</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(variety, Temp, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ST-512-HW5-Yefrid_Cordoba_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(Temp, variety, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ST-512-HW5-Yefrid_Cordoba_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 
