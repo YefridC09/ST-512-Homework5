@@ -60,4 +60,42 @@ Testing for levels of factor B: since the p-value (`r P_B`)for the factor B is m
 
 ### a
 
+Two way fixed model where interaction is not significant.
+
+```{r}
+a <- 4
+b <- 3
+n <- 3
+nT <- a * b * n
+SSE <- 720
+dfa <- a - 1
+dfb <- b - 1
+dfe <- nT - (a * b)
+MSE <- SSE / dfe
+```
+
+#### Tukey's HSD factor A
+
+```{r}
+SE <- sqrt(2*MSE/(b*n))
+SE
+qa <- qtukey(1-0.05, a, dfe)/sqrt(2)
+qa
+MEa <- SE * qa
+MEa
+```
+### b
+
+#### Tukey's HSD factor B
+
+```{r}
+SE <- sqrt(2*MSE/(a*n))
+SE
+qb <- qtukey(1-0.05, b, dfe)/sqrt(2)
+qb
+MEb <- SE * qb
+MEb
+```
+
+## Problem 3
 
