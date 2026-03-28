@@ -81,8 +81,18 @@ SE <- sqrt(2*MSE/(b*n))
 SE
 qa <- qtukey(1-0.05, a, dfe)/sqrt(2)
 qa
-MEa <- SE * qa
-MEa
+qHSDa <- SE * qa
+qHSDa
+```
+
+#### Bonferroni factor A
+
+```{r}
+g = a*(a-1)/2
+BA = qt(1-(0.05/(2*g)), nT - a * b) 
+BA
+BMSDa = SE * BA
+BMSDa
 ```
 
 ### b
@@ -94,8 +104,18 @@ SE <- sqrt(2*MSE/(a*n))
 SE
 qb <- qtukey(1-0.05, b, dfe)/sqrt(2)
 qb
-MEb <- SE * qb
-MEb
+qHSDb <- SE * qb
+qHSDb
+```
+
+#### Bonferroni factor A
+
+```{r}
+g = b*(b-1)/2
+BB = qt(1-(0.05/(2*g)), nT - a * b) 
+BB
+BMSDb = SE * BB
+BMSDb
 ```
 
 ## Problem 3
@@ -196,3 +216,71 @@ $H_a: (\alpha\beta)_{ij} \neq 0$ for at least one.
 Based on the P-value for the interaction term (`r P_AB`), and that we assumed an $\alpha = 0.05$, we reject the null hypothesis and have strong evidence to conclude that there is an interaction between variety of plant and temperature.
 
 ## Problem 4
+
+```{r}
+SSA <- 1255.24
+SSAB <- 882.76
+SST <- 4266.31
+MSE <- 56.38
+a <- 3
+b <- 3
+n <- 5
+nT <- a * b * n
+dfa <- a - 1
+dfb <- b - 1
+dfab <- dfa * dfb
+dfe <- nT - a * b
+SSE <- MSE * dfe
+SSB <- SST - SSA - SSAB - SSE
+MSA <- SSA / dfa
+MSB <- SSB / dfb
+MSAB <- SSA / dfab
+F_A <- MSA / MSE
+F_B <- MSB / MSE
+F_AB <- MSAB / MSE
+P_A <- pf(F_A, dfa, dfe, lower.tail = F)
+P_B <- pf(F_B, dfb, dfe, lower.tail = F)
+P_AB <- pf(F_AB, dfab, dfe, lower.tail = F)
+```
+
+| Source | df | Sum of squares | Mean square | F-value | P-value |
+|--------------|------------|------------|------------|------------|------------|
+| Climate (A) | [`r dfa`]{.underline} | 1255.24 | [`r MSA`]{.underline} | [`r round(F_A, 2)`]{.underline} | [`r P_A`]{.underline} |
+| Body location (B) | [`r dfb`]{.underline} | [`r format(round(SSB, 2), scientific = F)`]{.underline} | [`r MSB`]{.underline} | [`r round(F_B, 2)`]{.underline} | [`r P_B`]{.underline} |
+| Interaction (A\*B) | [`r dfab`]{.underline} | 882.76 | [`r MSA`]{.underline} | [`r round(F_AB, 2)`]{.underline} | [`r P_AB`]{.underline} |
+| Error | [`r dfe`]{.underline} | [`r round(SSE, 2)`]{.underline} | 56.38 |  |  |
+| Total | `r nT - 1` | 4266.31 |  |  |  |
+
+I want to test whether there are significant differences between the number of bites in the arm or neck in cold and humid climates.
+
+$H_o : \frac{\mu_{11} + \mu_{12}}{2} = \frac{\mu_{31} + \mu_{32}}{2}$
+
+$L = \frac{1}{2}\mu_{11} + \frac{1}{2}\mu_{12} + (-\frac{1}{2})\mu_{31} = (-\frac{1}{2})\mu_{32}$
+
+$\hat{L} = \frac{1}{2}\bar{y}_{11\cdot} + \frac{1}{2}\bar{y}_{12\cdot} + (-\frac{1}{2})\bar{y}_{31\cdot} + (-\frac{1}{2})\bar{y}_{32\cdot}$
+
+```{r}
+y11 <- 22.3
+y12 <- 19.8
+y31 <- 28
+y32 <- 26
+L_hat <- 0.5 * y11 + 0.5 * y12 - 0.5 * y31 - 0.5 * y32
+L_hat
+```
+
+$\hat{L} =$ `r L_hat`
+
+```{r}
+n <- 5
+s_L <- sqrt(MSE * ((4 * (1/2)^2)/n))
+s_L
+```
+
+$s(\hat{L}) =$ `r s_L`
+
+```{r}
+t <- L_hat/s_L
+t
+pt(t, dfe)
+```
+

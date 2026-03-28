@@ -266,10 +266,26 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.758609</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>MEa <span class="ot">&lt;-</span> SE <span class="sc">*</span> qa</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>MEa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>qHSDa <span class="ot">&lt;-</span> SE <span class="sc">*</span> qa</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>qHSDa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.122697</code></pre>
+</div>
+</div>
+</section>
+<section id="bonferroni-factor-a" class="level4">
+<h4 class="anchored" data-anchor-id="bonferroni-factor-a">Bonferroni factor A</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> a<span class="sc">*</span>(a<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>BA <span class="ot">=</span> <span class="fu">qt</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="fl">0.05</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>g)), nT <span class="sc">-</span> a <span class="sc">*</span> b) </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>BA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.875094</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>BMSDa <span class="ot">=</span> SE <span class="sc">*</span> BA</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>BMSDa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.423462</code></pre>
 </div>
 </div>
 </section>
@@ -279,20 +295,36 @@ window.Quarto = {
 <section id="tukeys-hsd-factor-b" class="level4">
 <h4 class="anchored" data-anchor-id="tukeys-hsd-factor-b">Tukey’s HSD factor B</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span>MSE<span class="sc">/</span>(a<span class="sc">*</span>n))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span>MSE<span class="sc">/</span>(a<span class="sc">*</span>n))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.236068</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>qb <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(<span class="dv">1</span><span class="fl">-0.05</span>, b, dfe)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">2</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>qb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>qb <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(<span class="dv">1</span><span class="fl">-0.05</span>, b, dfe)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">2</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>qb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.497287</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>MEb <span class="ot">&lt;-</span> SE <span class="sc">*</span> qb</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>MEb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>qHSDb <span class="ot">&lt;-</span> SE <span class="sc">*</span> qb</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>qHSDb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.584104</code></pre>
+</div>
+</div>
+</section>
+<section id="bonferroni-factor-a-1" class="level4">
+<h4 class="anchored" data-anchor-id="bonferroni-factor-a-1">Bonferroni factor A</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> b<span class="sc">*</span>(b<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>BB <span class="ot">=</span> <span class="fu">qt</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="fl">0.05</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>g)), nT <span class="sc">-</span> a <span class="sc">*</span> b) </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>BB</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.573641</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>BMSDb <span class="ot">=</span> SE <span class="sc">*</span> BB</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>BMSDb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.754836</code></pre>
 </div>
 </div>
 </section>
@@ -320,19 +352,19 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="b-2">b</h3>
 <p>2-way ANOVA partial output fo the model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dfm <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>SSm <span class="ot">&lt;-</span> <span class="fl">71692.11</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>MSE <span class="ot">&lt;-</span> <span class="fl">47.413</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>nT <span class="ot">&lt;-</span> a <span class="sc">*</span> b <span class="sc">*</span> n</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>dfe<span class="ot">&lt;-</span> nT <span class="sc">-</span> a <span class="sc">*</span> b</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>dfT <span class="ot">&lt;-</span> dfm <span class="sc">+</span> dfe</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> MSE <span class="sc">*</span> dfe</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>MSm <span class="ot">&lt;-</span> SSm <span class="sc">/</span> dfm</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>F_m <span class="ot">&lt;-</span> MSm <span class="sc">/</span> MSE</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>P_m <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_m, dfm, dfe, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>dfm <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>SSm <span class="ot">&lt;-</span> <span class="fl">71692.11</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>MSE <span class="ot">&lt;-</span> <span class="fl">47.413</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>nT <span class="ot">&lt;-</span> a <span class="sc">*</span> b <span class="sc">*</span> n</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>dfe<span class="ot">&lt;-</span> nT <span class="sc">-</span> a <span class="sc">*</span> b</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>dfT <span class="ot">&lt;-</span> dfm <span class="sc">+</span> dfe</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> MSE <span class="sc">*</span> dfe</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>MSm <span class="ot">&lt;-</span> SSm <span class="sc">/</span> dfm</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>F_m <span class="ot">&lt;-</span> MSm <span class="sc">/</span> MSE</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>P_m <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_m, dfm, dfe, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <table class="caption-top table">
 <colgroup>
@@ -381,21 +413,21 @@ window.Quarto = {
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dfa <span class="ot">&lt;-</span> a <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dfb <span class="ot">&lt;-</span> b <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>dfab <span class="ot">&lt;-</span> dfa <span class="sc">*</span> dfb</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>MSA <span class="ot">&lt;-</span> <span class="fl">1662.89</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>MSAB <span class="ot">&lt;-</span> <span class="fl">1704.14</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>SSA <span class="ot">&lt;-</span> MSA <span class="sc">*</span> dfa</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>SSAB <span class="ot">&lt;-</span> MSAB <span class="sc">*</span>dfab</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>SSB <span class="ot">&lt;-</span> SSm <span class="sc">-</span> SSA <span class="sc">-</span> SSAB</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>MSB <span class="ot">&lt;-</span> SSB <span class="sc">/</span> dfb</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>F_A <span class="ot">&lt;-</span> MSA <span class="sc">/</span> MSE</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>F_B <span class="ot">&lt;-</span> MSB <span class="sc">/</span> MSE</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>F_AB <span class="ot">&lt;-</span> MSAB <span class="sc">/</span> MSE</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>P_A <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_A, dfa, dfe, <span class="at">lower.tail =</span> F)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>P_B <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_B, dfb, dfe, <span class="at">lower.tail =</span> F)</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>P_AB <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_AB, dfab, dfe, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dfa <span class="ot">&lt;-</span> a <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>dfb <span class="ot">&lt;-</span> b <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>dfab <span class="ot">&lt;-</span> dfa <span class="sc">*</span> dfb</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>MSA <span class="ot">&lt;-</span> <span class="fl">1662.89</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>MSAB <span class="ot">&lt;-</span> <span class="fl">1704.14</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>SSA <span class="ot">&lt;-</span> MSA <span class="sc">*</span> dfa</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>SSAB <span class="ot">&lt;-</span> MSAB <span class="sc">*</span>dfab</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>SSB <span class="ot">&lt;-</span> SSm <span class="sc">-</span> SSA <span class="sc">-</span> SSAB</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>MSB <span class="ot">&lt;-</span> SSB <span class="sc">/</span> dfb</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>F_A <span class="ot">&lt;-</span> MSA <span class="sc">/</span> MSE</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>F_B <span class="ot">&lt;-</span> MSB <span class="sc">/</span> MSE</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>F_AB <span class="ot">&lt;-</span> MSAB <span class="sc">/</span> MSE</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>P_A <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_A, dfa, dfe, <span class="at">lower.tail =</span> F)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>P_B <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_B, dfb, dfe, <span class="at">lower.tail =</span> F)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>P_AB <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_AB, dfab, dfe, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <table class="caption-top table">
 <colgroup>
@@ -444,22 +476,22 @@ window.Quarto = {
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>variety <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">12</span>), <span class="at">each =</span> <span class="dv">3</span>))</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Temp <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>), <span class="at">times =</span> <span class="dv">3</span>))</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>Dry <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">28.71</span>, <span class="fl">53.57</span>, <span class="fl">126.86</span>, <span class="fl">40.14</span>, <span class="fl">66.86</span>, <span class="fl">103.57</span>, <span class="fl">31.71</span>, <span class="fl">53.43</span>, <span class="fl">80.26</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(variety, Temp, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>variety <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">12</span>), <span class="at">each =</span> <span class="dv">3</span>))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>Temp <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>), <span class="at">times =</span> <span class="dv">3</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>Dry <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">28.71</span>, <span class="fl">53.57</span>, <span class="fl">126.86</span>, <span class="fl">40.14</span>, <span class="fl">66.86</span>, <span class="fl">103.57</span>, <span class="fl">31.71</span>, <span class="fl">53.43</span>, <span class="fl">80.26</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(variety, Temp, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="c-1" class="level3">
 <h3 class="anchored" data-anchor-id="c-1">c</h3>
 <p>Interaction plot</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(Temp, variety, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(Temp, variety, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ST-512-HW5-Yefrid_Cordoba_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ST-512-HW5-Yefrid_Cordoba_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -475,6 +507,129 @@ window.Quarto = {
 </section>
 <section id="problem-4" class="level2">
 <h2 class="anchored" data-anchor-id="problem-4">Problem 4</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>SSA <span class="ot">&lt;-</span> <span class="fl">1255.24</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>SSAB <span class="ot">&lt;-</span> <span class="fl">882.76</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>SST <span class="ot">&lt;-</span> <span class="fl">4266.31</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>MSE <span class="ot">&lt;-</span> <span class="fl">56.38</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>nT <span class="ot">&lt;-</span> a <span class="sc">*</span> b <span class="sc">*</span> n</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>dfa <span class="ot">&lt;-</span> a <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>dfb <span class="ot">&lt;-</span> b <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>dfab <span class="ot">&lt;-</span> dfa <span class="sc">*</span> dfb</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>dfe <span class="ot">&lt;-</span> nT <span class="sc">-</span> a <span class="sc">*</span> b</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> MSE <span class="sc">*</span> dfe</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>SSB <span class="ot">&lt;-</span> SST <span class="sc">-</span> SSA <span class="sc">-</span> SSAB <span class="sc">-</span> SSE</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>MSA <span class="ot">&lt;-</span> SSA <span class="sc">/</span> dfa</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>MSB <span class="ot">&lt;-</span> SSB <span class="sc">/</span> dfb</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>MSAB <span class="ot">&lt;-</span> SSA <span class="sc">/</span> dfab</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>F_A <span class="ot">&lt;-</span> MSA <span class="sc">/</span> MSE</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>F_B <span class="ot">&lt;-</span> MSB <span class="sc">/</span> MSE</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>F_AB <span class="ot">&lt;-</span> MSAB <span class="sc">/</span> MSE</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>P_A <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_A, dfa, dfe, <span class="at">lower.tail =</span> F)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>P_B <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_B, dfb, dfe, <span class="at">lower.tail =</span> F)</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>P_AB <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_AB, dfab, dfe, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>df</th>
+<th>Sum of squares</th>
+<th>Mean square</th>
+<th>F-value</th>
+<th>P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Climate (A)</td>
+<td><u>2</u></td>
+<td>1255.24</td>
+<td><u>627.62</u></td>
+<td><u>11.13</u></td>
+<td><u>1.7228598^{-4}</u></td>
+</tr>
+<tr class="even">
+<td>Body location (B)</td>
+<td><u>2</u></td>
+<td><u>98.63</u></td>
+<td><u>49.315</u></td>
+<td><u>0.87</u></td>
+<td><u>0.4256654</u></td>
+</tr>
+<tr class="odd">
+<td>Interaction (A*B)</td>
+<td><u>4</u></td>
+<td>882.76</td>
+<td><u>627.62</u></td>
+<td><u>5.57</u></td>
+<td><u>0.0013573</u></td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td><u>36</u></td>
+<td><u>2029.68</u></td>
+<td>56.38</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>44</td>
+<td>4266.31</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>I want to test whether there are significant differences between the number of bites in the arm or neck in cold and humid climates.</p>
+<p><span class="math inline">\(H_o : \frac{\mu_{11} + \mu_{12}}{2} = \frac{\mu_{31} + \mu_{32}}{2}\)</span></p>
+<p><span class="math inline">\(L = \frac{1}{2}\mu_{11} + \frac{1}{2}\mu_{12} + (-\frac{1}{2})\mu_{31} = (-\frac{1}{2})\mu_{32}\)</span></p>
+<p><span class="math inline">\(\hat{L} = \frac{1}{2}\bar{y}_{11\cdot} + \frac{1}{2}\bar{y}_{12\cdot} + (-\frac{1}{2})\bar{y}_{31\cdot} + (-\frac{1}{2})\bar{y}_{32\cdot}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>y11 <span class="ot">&lt;-</span> <span class="fl">22.3</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>y12 <span class="ot">&lt;-</span> <span class="fl">19.8</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>y31 <span class="ot">&lt;-</span> <span class="dv">28</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>y32 <span class="ot">&lt;-</span> <span class="dv">26</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>L_hat <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">*</span> y11 <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> y12 <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> y31 <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> y32</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>L_hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -5.95</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\hat{L} =\)</span> -5.95</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>s_L <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(MSE <span class="sc">*</span> ((<span class="dv">4</span> <span class="sc">*</span> (<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>n))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>s_L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.357976</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(s(\hat{L}) =\)</span> 3.3579756</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> L_hat<span class="sc">/</span>s_L</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.771901</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(t, dfe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04243777</code></pre>
+</div>
+</div>
 </section>
 
 </main>
