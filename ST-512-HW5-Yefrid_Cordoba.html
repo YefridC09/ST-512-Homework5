@@ -67,7 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="ST-512-HW5-Yefrid_Cordoba_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="ST-512-HW5-Yefrid_Cordoba_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="ST-512-HW5-Yefrid_Cordoba_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="ST-512-HW5-Yefrid_Cordoba_files/libs/bootstrap/bootstrap-1bc8a17f135ab3d594c857e9f48e611b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="ST-512-HW5-Yefrid_Cordoba_files/libs/bootstrap/bootstrap-00b89fee0a844e7981cdfbc55183e926.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -314,35 +314,167 @@ window.Quarto = {
 <span class="math inline">\((\alpha\beta)_{ij}\)</span> interaction of the variety and temperature.<br>
 <span class="math inline">\(\epsilon_{ijk} =\)</span> random error of the <span class="math inline">\(k^{th}\)</span> pot for the <span class="math inline">\(i^{th}\)</span> variety exposed to <span class="math inline">\(j^{th}\)</span> temperature.<br>
 </p>
+<p>Assuming <span class="math inline">\(\epsilon_{ijk} \sim N(0, \sigma^2)\)</span>, the errors are indepe</p>
+</section>
+<section id="b-2" class="level3">
+<h3 class="anchored" data-anchor-id="b-2">b</h3>
+<p>2-way ANOVA partial output fo the model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>variety <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">12</span>), <span class="at">each =</span> <span class="dv">3</span>))</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>Temp <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>), <span class="at">times =</span> <span class="dv">3</span>))</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>Dry <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">28.71</span>, <span class="fl">53.57</span>, <span class="fl">126.86</span>, <span class="fl">40.14</span>, <span class="fl">66.86</span>, <span class="fl">103.57</span>, <span class="fl">31.71</span>, <span class="fl">53.43</span>, <span class="fl">80.26</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(variety, Temp, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dfm <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>SSm <span class="ot">&lt;-</span> <span class="fl">71692.11</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>MSE <span class="ot">&lt;-</span> <span class="fl">47.413</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>nT <span class="ot">&lt;-</span> a <span class="sc">*</span> b <span class="sc">*</span> n</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>dfe<span class="ot">&lt;-</span> nT <span class="sc">-</span> a <span class="sc">*</span> b</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>dfT <span class="ot">&lt;-</span> dfm <span class="sc">+</span> dfe</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> MSE <span class="sc">*</span> dfe</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>MSm <span class="ot">&lt;-</span> SSm <span class="sc">/</span> dfm</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>F_m <span class="ot">&lt;-</span> MSm <span class="sc">/</span> MSE</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>P_m <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_m, dfm, dfe, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>df</th>
+<th>Sum of squares</th>
+<th>Mean square</th>
+<th>F-value</th>
+<th>P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td>8</td>
+<td>71692.11</td>
+<td><u>8961.51</u></td>
+<td><u>189.01</u></td>
+<td>&lt; 0.0001</td>
+</tr>
+<tr class="even">
+<td>Error</td>
+<td><u>63</u></td>
+<td><u>2987.02</u></td>
+<td>47.413</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><u>71</u></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dfa <span class="ot">&lt;-</span> a <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dfb <span class="ot">&lt;-</span> b <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>dfab <span class="ot">&lt;-</span> dfa <span class="sc">*</span> dfb</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>MSA <span class="ot">&lt;-</span> <span class="fl">1662.89</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>MSAB <span class="ot">&lt;-</span> <span class="fl">1704.14</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>SSA <span class="ot">&lt;-</span> MSA <span class="sc">*</span> dfa</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>SSAB <span class="ot">&lt;-</span> MSAB <span class="sc">*</span>dfab</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>SSB <span class="ot">&lt;-</span> SSm <span class="sc">-</span> SSA <span class="sc">-</span> SSAB</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>MSB <span class="ot">&lt;-</span> SSB <span class="sc">/</span> dfb</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>F_A <span class="ot">&lt;-</span> MSA <span class="sc">/</span> MSE</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>F_B <span class="ot">&lt;-</span> MSB <span class="sc">/</span> MSE</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>F_AB <span class="ot">&lt;-</span> MSAB <span class="sc">/</span> MSE</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>P_A <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_A, dfa, dfe, <span class="at">lower.tail =</span> F)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>P_B <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_B, dfb, dfe, <span class="at">lower.tail =</span> F)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>P_AB <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_AB, dfab, dfe, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>df</th>
+<th>Sum of squares</th>
+<th>Mean square</th>
+<th>F-value</th>
+<th>P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variety</td>
+<td><u>2</u></td>
+<td><u>3325.78</u></td>
+<td>1662.89</td>
+<td><u>35.07</u></td>
+<td><u>5.7943502^{-11}</u></td>
+</tr>
+<tr class="even">
+<td>Temperature</td>
+<td><u>2</u></td>
+<td><u>61549.77</u></td>
+<td><u>30774.89</u></td>
+<td><u>649.08</u></td>
+<td><u>9.1424985^{-43}</u></td>
+</tr>
+<tr class="odd">
+<td>Variety*Temp</td>
+<td><u>4</u></td>
+<td><u>6816.56</u></td>
+<td>1704.14</td>
+<td><u>35.94</u></td>
+<td><u>1.2625845^{-15}</u></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>variety <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">12</span>), <span class="at">each =</span> <span class="dv">3</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Temp <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>), <span class="at">times =</span> <span class="dv">3</span>))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>Dry <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">28.71</span>, <span class="fl">53.57</span>, <span class="fl">126.86</span>, <span class="fl">40.14</span>, <span class="fl">66.86</span>, <span class="fl">103.57</span>, <span class="fl">31.71</span>, <span class="fl">53.43</span>, <span class="fl">80.26</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(variety, Temp, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="c-1" class="level3">
 <h3 class="anchored" data-anchor-id="c-1">c</h3>
+<p>Interaction plot</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(variety, Temp, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(Temp, variety, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ST-512-HW5-Yefrid_Cordoba_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(Temp, variety, Dry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ST-512-HW5-Yefrid_Cordoba_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ST-512-HW5-Yefrid_Cordoba_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>The interaction plot shows that between the different treatments can be guessed that the interaction term is significant, since all of the lines are not following the same trend, one of them (variety P0)cross over the others.</p>
 </section>
+<section id="d-1" class="level3">
+<h3 class="anchored" data-anchor-id="d-1">d</h3>
+<p><span class="math inline">\(H_o: (\alpha\beta)_{ij} = 0\)</span> for all <span class="math inline">\(i, j\)</span><br>
+<span class="math inline">\(H_a: (\alpha\beta)_{ij} \neq 0\)</span> for at least one.</p>
+<p>Based on the P-value for the interaction term (1.2625845^{-15}), and that we assumed an <span class="math inline">\(\alpha = 0.05\)</span>, we reject the null hypothesis and have strong evidence to conclude that there is an interaction between variety of plant and temperature.</p>
+</section>
+</section>
+<section id="problem-4" class="level2">
+<h2 class="anchored" data-anchor-id="problem-4">Problem 4</h2>
 </section>
 
 </main>

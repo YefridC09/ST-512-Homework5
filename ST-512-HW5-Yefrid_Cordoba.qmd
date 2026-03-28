@@ -84,6 +84,7 @@ qa
 MEa <- SE * qa
 MEa
 ```
+
 ### b
 
 #### Tukey's HSD factor B
@@ -101,8 +102,7 @@ MEb
 
 ### a
 
-Factor effects model
-$y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} +\epsilon_{ijk}$
+Factor effects model $y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} +\epsilon_{ijk}$
 
 Where:
 
@@ -114,9 +114,60 @@ $\mu =$ a constant\
 $\alpha_i =$ the effect of the $i^{th}$ variety.\
 $\beta_j =$ the effect of the $j^{th}$ temperature.\
 $(\alpha\beta)_{ij}$ interaction of the variety and temperature.\
-$\epsilon_{ijk} =$ random error of the $k^{th}$ pot for the  $i^{th}$ variety exposed to $j^{th}$ temperature.\
+$\epsilon_{ijk} =$ random error of the $k^{th}$ pot for the $i^{th}$ variety exposed to $j^{th}$ temperature.\
 
 Assuming $\epsilon_{ijk} \sim N(0, \sigma^2)$, the errors are indepe
+
+### b
+
+2-way ANOVA partial output fo the model.
+
+```{r}
+dfm <- 8
+SSm <- 71692.11
+MSE <- 47.413
+a <- 3
+b <- 3
+n <- 8
+nT <- a * b * n
+dfe<- nT - a * b
+dfT <- dfm + dfe
+SSE <- MSE * dfe
+MSm <- SSm / dfm
+F_m <- MSm / MSE
+P_m <- pf(F_m, dfm, dfe, lower.tail = F)
+```
+
+| Source | df | Sum of squares | Mean square | F-value | P-value |
+|------------|------------|------------|------------|------------|------------|
+| Model | 8 | 71692.11 | [`r round(MSm, 2)`]{.underline} | [`r round(F_m, 2)`]{.underline} | \< 0.0001 |
+| Error | [`r dfe`]{.underline} | [`r round(SSE, 2)`]{.underline} | 47.413 |  |  |
+| Total | [`r dfT`]{.underline} |  |  |  |  |
+
+```{r}
+dfa <- a - 1
+dfb <- b - 1
+dfab <- dfa * dfb
+MSA <- 1662.89
+MSAB <- 1704.14
+SSA <- MSA * dfa
+SSAB <- MSAB *dfab
+SSB <- SSm - SSA - SSAB
+MSB <- SSB / dfb
+F_A <- MSA / MSE
+F_B <- MSB / MSE
+F_AB <- MSAB / MSE
+P_A <- pf(F_A, dfa, dfe, lower.tail = F)
+P_B <- pf(F_B, dfb, dfe, lower.tail = F)
+P_AB <- pf(F_AB, dfab, dfe, lower.tail = F)
+
+```
+
+| Source | df | Sum of squares | Mean square | F-value | P-value |
+|------------|------------|------------|------------|------------|------------|
+| Variety | [`r dfa`]{.underline} | [`r round(SSA, 2)`]{.underline} | 1662.89 | [`r round(F_A, 2)`]{.underline} | [`r P_A`]{.underline} |
+| Temperature | [`r dfb`]{.underline} | [`r format(round(SSB, 2), scientific = F)`]{.underline} | [`r format(round(MSB, 2), scientific = F)`]{.underline} | [`r round(F_B, 2)`]{.underline} | [`r P_B`]{.underline} |
+| Variety\*Temp | [`r dfab`]{.underline} | [`r round(SSAB, 2)`]{.underline} | 1704.14 | [`r round(F_AB, 2)`]{.underline} | [`r P_AB`]{.underline} |
 
 ```{r}
 variety <- factor(rep(c(0, 6, 12), each = 3))
@@ -128,8 +179,20 @@ data <- data.frame(variety, Temp, Dry)
 ```
 
 ### c
+
+Interaction plot
+
 ```{r}
-interaction.plot(variety, Temp, Dry)
 interaction.plot(Temp, variety, Dry)
 ```
 
+The interaction plot shows that between the different treatments can be guessed that the interaction term is significant, since all of the lines are not following the same trend, one of them (variety P0)cross over the others.
+
+### d
+
+$H_o: (\alpha\beta)_{ij} = 0$ for all $i, j$\
+$H_a: (\alpha\beta)_{ij} \neq 0$ for at least one.
+
+Based on the P-value for the interaction term (`r P_AB`), and that we assumed an $\alpha = 0.05$, we reject the null hypothesis and have strong evidence to conclude that there is an interaction between variety of plant and temperature.
+
+## Problem 4
