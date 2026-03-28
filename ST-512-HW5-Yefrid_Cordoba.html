@@ -630,6 +630,54 @@ window.Quarto = {
 <pre><code>[1] 0.04243777</code></pre>
 </div>
 </div>
+<p>Based on the P-values obtained (0.0424378)which is lower than a significance level of <span class="math inline">\(\alpha = 0.05\)</span>, we reject the null hypothesis and have strong evidence to conclude that there is a significant difference between the number of bites in the arm or neck in cold and humid climates.</p>
+</section>
+<section id="problem-5" class="level2">
+<h2 class="anchored" data-anchor-id="problem-5">Problem 5</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">72</span> <span class="sc">+</span> <span class="dv">180</span> <span class="sc">+</span> <span class="dv">15</span> <span class="sc">+</span> <span class="dv">32</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>SSE1 <span class="ot">&lt;-</span> <span class="dv">42088</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>SSE2 <span class="ot">&lt;-</span> <span class="dv">42122</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>SSE3 <span class="ot">&lt;-</span> <span class="dv">42873</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="a-3" class="level3">
+<h3 class="anchored" data-anchor-id="a-3">a</h3>
+<p>Testing whether there is an interaction between gender and rank</p>
+<p><span class="math inline">\(H_o: \beta_3 =0\)</span><br>
+<span class="math inline">\(H_a: \beta_3 \neq 0\)</span></p>
+<p>Full model is model 1.<br>
+Reduced model is model 2.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>dfr <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">3</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>dff <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">4</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>F_a <span class="ot">&lt;-</span> ((SSE2 <span class="sc">-</span> SSE1)<span class="sc">/</span>(dfr <span class="sc">-</span> dff))<span class="sc">/</span>(SSE1<span class="sc">/</span>dff)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>P_a <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_a, dfr <span class="sc">-</span> dff, dff )</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>P_a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3742081</code></pre>
+</div>
+</div>
+<p>Given that the P-value = 0.3742081 assessing whether the interaction term is significant, we fail to reject the null hypothesis, and have weak evidence to conclude that there is an interaction between gender and rank on ethics scores.</p>
+</section>
+<section id="b-3" class="level3">
+<h3 class="anchored" data-anchor-id="b-3">b</h3>
+<p>Testing whether there is main effect for gender</p>
+<p><span class="math inline">\(H_o: \beta_1 =0\)</span><br>
+<span class="math inline">\(H_a: \beta_1 \neq 0\)</span></p>
+<p>Full model is model 1.<br>
+Reduced model is model 3.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>dfr <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">3</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>dff <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">4</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>F_b <span class="ot">&lt;-</span> ((SSE3 <span class="sc">-</span> SSE1)<span class="sc">/</span>(dfr <span class="sc">-</span> dff))<span class="sc">/</span>(SSE1<span class="sc">/</span>dff)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>P_b <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_b, dfr <span class="sc">-</span> dff, dff )</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>P_b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9803448</code></pre>
+</div>
+</div>
+<p>Given that the P-value = 0.9803448 assessing whether the meain effect of gender is significant, we fail to reject the null hypothesis, and have weak evidence to conclude that gender has a main effect on ethics scores.</p>
+</section>
 </section>
 
 </main>

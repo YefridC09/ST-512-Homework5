@@ -284,3 +284,51 @@ t
 pt(t, dfe)
 ```
 
+Based on the P-values obtained (`r pt(t, dfe)`)which is lower than a significance level of $\alpha = 0.05$, we reject the null hypothesis and have strong evidence to conclude that there is a significant difference between the number of bites in the arm or neck in cold and humid climates.
+
+## Problem 5
+
+```{r}
+n <- 72 + 180 + 15 + 32
+SSE1 <- 42088
+SSE2 <- 42122
+SSE3 <- 42873
+```
+
+### a
+Testing whether there is an interaction between gender and rank
+
+$H_o: \beta_3 =0$\
+$H_a: \beta_3 \neq 0$
+
+Full model is model 1.\
+Reduced model is model 2.
+
+```{r}
+dfr <- n - 3 
+dff <- n - 4
+F_a <- ((SSE2 - SSE1)/(dfr - dff))/(SSE1/dff)
+P_a <- pf(F_a, dfr - dff, dff )
+P_a
+```
+
+Given that the P-value = `r P_a` assessing whether the interaction term is significant, we fail to reject the null hypothesis, and have weak evidence to conclude that there is an interaction between gender and rank on ethics scores.
+
+### b
+Testing whether there is main effect for gender
+
+$H_o: \beta_1 =0$\
+$H_a: \beta_1 \neq 0$
+
+Full model is model 1.\
+Reduced model is model 3.
+
+```{r}
+dfr <- n - 3 
+dff <- n - 4
+F_b <- ((SSE3 - SSE1)/(dfr - dff))/(SSE1/dff)
+P_b <- pf(F_b, dfr - dff, dff )
+P_b
+```
+
+Given that the P-value = `r P_b` assessing whether the meain effect of gender is significant, we fail to reject the null hypothesis, and have weak evidence to conclude that gender has a main effect on ethics scores.
